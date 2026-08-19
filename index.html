@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Evaluación Módulo 1 — Razonamiento Cuantitativo</title>
+  <style>
+    :root{--bg:#f4f7fb;--card:#fff;--ink:#17324d;--muted:#66788a;--accent:#0f5f75;--accent2:#1684a1;--ok:#1f8f52;--bad:#c44444;--line:#dce5ec}
+    *{box-sizing:border-box} body{margin:0;background:linear-gradient(180deg,#eef5f8,#f8fafc);font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink)}
+    .wrap{max-width:1050px;margin:0 auto;padding:28px 18px 50px}.hero{background:linear-gradient(135deg,#0d4658,#0f7187);color:#fff;border-radius:22px;padding:30px 28px;box-shadow:0 14px 35px rgba(13,70,88,.18)}
+    .hero h1{margin:0 0 8px;font-size:28px}.hero p{margin:0;color:#e8f5f8}.pill{display:inline-block;margin-top:14px;background:rgba(255,255,255,.15);padding:7px 12px;border-radius:999px;font-size:13px}
+    .info{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}.field,.card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 24px rgba(21,55,73,.06)}
+    .field{padding:16px}.field label{display:block;font-weight:700;margin-bottom:8px}.field input{width:100%;padding:11px 12px;border:1px solid #cfd9e2;border-radius:10px;font-size:15px}
+    .progress{position:sticky;top:0;z-index:5;background:rgba(248,250,252,.94);backdrop-filter:blur(10px);padding:10px 0}.progrow{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:6px}.bar{height:9px;border-radius:10px;background:#dfe8ee;overflow:hidden}.bar>span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:.25s}
+    .section{margin-top:22px;margin-bottom:12px}.section h2{font-size:18px;margin:0 0 5px}.section p{margin:0;color:var(--muted);font-size:14px}
+    .q{padding:20px;margin:14px 0}.qhead{display:flex;gap:12px;align-items:flex-start}.num{width:38px;height:38px;border-radius:12px;background:#eaf4f6;color:var(--accent);display:grid;place-items:center;font-weight:800;flex:0 0 38px}.qtitle{font-weight:700;line-height:1.45;font-size:16px}.figure{margin:15px 0;border:1px solid var(--line);border-radius:14px;padding:10px;background:#fbfdfe;text-align:center}.figure img{max-width:100%;max-height:360px;object-fit:contain}.option{display:flex;align-items:flex-start;gap:10px;border:1px solid var(--line);border-radius:12px;padding:12px 13px;margin:9px 0;cursor:pointer;transition:.16s;background:#fff}.option:hover{border-color:#9ab9c4;background:#f7fbfc}.option input{margin-top:4px;accent-color:var(--accent)}
+    .data-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}.data-table th,.data-table td{border:1px solid var(--line);padding:8px;text-align:center}.data-table th{background:#edf5f7}
+    .actions{display:flex;justify-content:center;margin:24px 0}.btn{border:0;border-radius:14px;padding:14px 22px;background:var(--accent);color:#fff;font-weight:800;font-size:16px;cursor:pointer}.btn:disabled{opacity:.55;cursor:not-allowed}
+    .result{display:none}.score{background:linear-gradient(135deg,#103f50,#0f6c7f);color:white;border-radius:22px;padding:28px;text-align:center;margin-top:18px}.score .big{font-size:44px;font-weight:900}.score .pct{font-size:18px;margin-top:4px}.review{margin-top:16px}.review .item{background:#fff;border:1px solid var(--line);border-left:6px solid var(--muted);border-radius:14px;padding:15px;margin:10px 0}.review .item.ok{border-left-color:var(--ok)}.review .item.bad{border-left-color:var(--bad)}.status{font-weight:900;margin-bottom:5px}.ok .status{color:var(--ok)}.bad .status{color:var(--bad)}.selected{color:#334d5d}.note{color:var(--muted);font-size:13px}.submit-status{margin-top:16px;padding:14px;border-radius:14px;background:#edf7f2;border:1px solid #b9dfca;color:#215c3b;display:none}.submit-status.show{display:block}.warning{background:#fff4df;border:1px solid #f0d59c;color:#714e10;padding:14px;border-radius:14px;margin-top:16px}
+    @media(max-width:720px){.info{grid-template-columns:1fr}.hero h1{font-size:23px}.wrap{padding:18px 12px 36px}.q{padding:16px}.score .big{font-size:36px}}
+    @media print{.hero,.progress,.info,.actions,.warning{display:none!important}.wrap{max-width:none;padding:0}.result{display:block!important}.score{color:#000;background:#eee}.review .item{break-inside:avoid}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <h1>Evaluación Módulo 1 — Razonamiento Cuantitativo</h1>
+    <p>Ingeniería de Logística y Sistemas · Evaluación virtual</p>
+    <span class="pill">No se mostrarán las respuestas correctas al finalizar</span>
+  </section>
+
+  <div class="info">
+    <div class="field"><label for="studentName">Nombre del estudiante</label><input id="studentName" type="text" placeholder="Escribe tu nombre completo"></div>
+    <div class="field"><label for="studentCode">Código / grupo (opcional)</label><input id="studentCode" type="text" placeholder="Código o grupo"></div>
+  </div>
+
+  <div id="formArea">
+    <div class="progress"><div class="progrow"><span id="answeredText">0 / 29 respondidas</span><span id="percentText">0%</span></div><div class="bar"><span id="barFill"></span></div></div>
+    <div id="questions"></div>
+    <div class="actions"><button class="btn" id="finishBtn">Finalizar evaluación</button></div>
+  </div>
+
+  <section class="result" id="resultArea">
+    <div class="score"><div id="resultName"></div><div class="big" id="scoreText">0 / 29</div><div class="pct" id="pctText">0%</div><div class="note" style="color:#e6f2f5;margin-top:10px">Se muestran únicamente tus resultados y tus respuestas seleccionadas.</div></div>
+    <div class="review" id="review"></div>
+    <div class="submit-status" id="submitStatus"></div>
+  </section>
+</div>
+<script>
+const CONFIG = {
+  APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbx8xzRO9FmxkF52AnOz-Rf5SDNqIUML5Q4rhkK2aL4hVoIW9-gu7pF2EvtQMYFYbBV2VQ/exec"
+};
+
+const questions = [
+{id:1, img:'images/image1.png', text:'La gráfica muestra el número de entregas realizadas por una empresa de logística durante el primer semestre del año. ¿Cuál fue la diferencia entre el mes de mayor y el de menor número de entregas?', opts:['110 entregas','150 entregas','130 entregas','170 entregas'], correct:1},
+{id:2, img:'images/image2.png', text:'La gráfica compara los ingresos trimestrales por transporte de carga en 2024 y 2025. ¿En qué trimestre se presentó el mayor crecimiento porcentual entre los dos años?', opts:['T1','T2','T4','T3'], correct:3},
+{id:3, img:'images/image3.png', text:'La gráfica de líneas muestra el tiempo promedio de entrega (en días) durante el primer semestre. ¿Cuál fue la variación porcentual del tiempo promedio de entrega entre febrero y junio?', opts:['-25%','-15%','-20%','-30%'], correct:0},
+{id:4, img:'images/image3.png', text:'Con base en la gráfica de tiempo promedio de entrega, ¿entre qué dos meses consecutivos se presentó la mayor reducción (en días) del indicador?', opts:['Enero-Febrero','Febrero-Marzo','Abril-Mayo','Mayo-Junio'], correct:2},
+{id:5, img:'images/image4.png', text:'La gráfica circular muestra la distribución de 8.000 envíos según el modo de transporte utilizado. ¿Cuántos envíos se realizaron por modo marítimo?', opts:['800 envíos','1.600 envíos','1.200 envíos','2.000 envíos'], correct:1},
+{id:6, img:'images/image5.png', text:'Las gráficas comparan la distribución porcentual de envíos por modo de transporte en 2023 (10.000 envíos en total) y 2024 (12.000 envíos en total). ¿Qué modo de transporte tuvo el mayor incremento en número absoluto de envíos entre los dos años?', opts:['Aéreo','Terrestre','Marítimo','Fluvial'], correct:0},
+{id:7, img:'images/image6.png', text:'La gráfica de barras apiladas muestra la composición del inventario (en miles de unidades) de cuatro bodegas, según su categoría. ¿Qué porcentaje del inventario total de la Bodega D corresponde a producto terminado?', opts:['35%','40%','50%','44%'], correct:3},
+{id:8, img:'images/image7.png', text:'La gráfica combinada relaciona el volumen despachado (barras) con el costo unitario de transporte (línea) durante 5 meses. Según la gráfica, ¿qué relación se observa entre las dos variables?', opts:['A mayor volumen despachado, mayor costo unitario.','No existe relación aparente entre las dos variables.','A mayor volumen despachado, menor costo unitario (economía de escala).','El costo unitario se mantiene constante sin importar el volumen.'], correct:2},
+{id:9, img:'images/image8.png', text:'El diagrama de dispersión relaciona la distancia de la ruta (km) con el tiempo de entrega (horas) para 10 envíos. ¿Qué tipo de relación se observa entre las dos variables?', opts:['Correlación positiva: a mayor distancia, mayor tiempo de entrega.','Correlación negativa: a mayor distancia, menor tiempo de entrega.','No se observa ninguna relación entre las variables.','Relación inversa de tipo exponencial.'], correct:0},
+{id:11, table:[['Categoría de costo ($ millones)','T1','T2','T3','T4'],['Transporte','45','48','52','50'],['Almacenamiento','20','22','21','23'],['Manejo de materiales','10','11','12','13'],['Administración','8','8','9','9']], text:'Según la tabla, ¿cuál fue el costo total de transporte durante todo el año?', opts:['$185 millones','$190 millones','$200 millones','$195 millones'], correct:3},
+{id:12, table:[['Trimestre','Costo logístico total ($ millones)','Ventas totales ($ millones)'],['T1','80','800'],['T2','99','900'],['T3','94','940'],['T4','114','950']], text:'¿En qué trimestre el costo logístico representó el mayor porcentaje de las ventas totales?', opts:['T4','T1','T2','T3'], correct:0},
+{id:13, table:[['Proveedor','Tarifa base','Tarifa por kg adicional'],['Transportes Andes','$50.000','$800/kg'],['LogiExpress','$30.000','$1.000/kg'],['CargaRápida','$70.000','$600/kg']], text:'Para un envío de 40 kg, ¿cuál proveedor ofrece el menor costo total?', opts:['Transportes Andes','CargaRápida','LogiExpress','Los tres tienen el mismo costo total'], correct:2},
+{id:14, table:[['Línea de producción','Unidades producidas','Unidades defectuosas'],['Línea A','5.000','150'],['Línea B','3.000','120'],['Línea C','4.000','100']], text:'¿Cuál línea de producción tiene la mayor tasa porcentual de productos defectuosos?', opts:['Línea A','Línea B','Línea C','Las tres tienen la misma tasa'], correct:1},
+{id:15, table:[['Producto','Ventas 2022','Ventas 2023','Ventas 2024'],['Producto X','1.000','1.100','1.250'],['Producto Y','800','1.040','1.100'],['Producto Z','1.200','1.180','1.300']], text:'¿Qué producto presentó el mayor crecimiento porcentual acumulado entre 2022 y 2024?', opts:['Producto X','Producto Z','Los tres productos crecieron igual','Producto Y'], correct:3},
+{id:16, table:[['Envío','Peso reportado'],['Envío 1','2,5 toneladas'],['Envío 2','2.300 kg'],['Envío 3','5.500 lb (1 lb ≈ 0,4536 kg)']], text:'Convirtiendo todos los pesos a kilogramos, ¿cuál es el orden correcto de los envíos de mayor a menor peso?', opts:['Envío 1 > Envío 3 > Envío 2','Envío 1 > Envío 2 > Envío 3','Envío 2 > Envío 1 > Envío 3','Envío 3 > Envío 1 > Envío 2'], correct:0},
+{id:17, table:[['Mes','Inventario inicial','Entradas','Salidas','Inventario final (reportado)'],['Enero','1.000','500','300','1.200'],['Febrero','1.200','400','350','1.250'],['Marzo','1.250','600','500','1.300'],['Abril','1.300','450','400','1.350']], text:'El inventario final de cada mes debería cumplir: Inventario final = Inventario inicial + Entradas − Salidas. ¿En qué mes el inventario final reportado NO coincide con este cálculo?', opts:['Enero','Febrero','Marzo','Abril'], correct:2},
+{id:18, table:[['Bodega','Costo por unidad ($)','Tiempo promedio de despacho (min)','Precisión de picking'],['Bodega A','1.200','45','96%'],['Bodega B','1.000','60','92%'],['Bodega C','1.100','50','98%']], text:'¿Cuál bodega presenta el menor costo por minuto de despacho (costo por unidad ÷ tiempo promedio de despacho)?', opts:['Bodega A','Bodega B','Bodega C','Las tres bodegas son iguales'], correct:1},
+{id:19, text:'Un camión consume 35 litros de combustible para recorrer 250 km. Manteniendo el mismo rendimiento, ¿aproximadamente cuántos litros consumirá en una ruta de 620 km?', opts:['62 litros','75 litros','98 litros','87 litros'], correct:3},
+{id:20, text:'Un equipo de 6 operarios organiza un centro de distribución en 8 horas. Si la empresa quiere reducir el tiempo total a 4 horas, manteniendo el mismo ritmo de trabajo por operario, ¿cuántos operarios adicionales debe contratar?', opts:['6 operarios adicionales','3 operarios adicionales','8 operarios adicionales','12 operarios adicionales'], correct:0},
+{id:21, text:'Cinco montacargas transportan 800 pallets en 4 días, trabajando 8 horas diarias. Manteniendo el mismo ritmo de trabajo por montacargas-hora, ¿cuántos pallets transportarán 8 montacargas en 6 días, trabajando 6 horas diarias?', opts:['960 pallets','1.200 pallets','1.440 pallets','1.600 pallets'], correct:2},
+{id:22, text:'El precio del flete de un contenedor se incrementó un 12% respecto al mes anterior. Si el nuevo precio es de $560.000, ¿cuál era el precio antes del incremento?', opts:['$480.000','$500.000','$492.800','$512.000'], correct:1},
+{id:23, table:[['Presentación','Unidades por caja','Precio por caja'],['Caja A','24','$36.000'],['Caja B','36','$50.400'],['Caja C','18','$28.800']], text:'Un proveedor ofrece tres presentaciones de un mismo insumo. ¿Cuál caja tiene el menor costo por unidad?', opts:['Caja A','Caja C','Las tres tienen el mismo costo por unidad','Caja B'], correct:3},
+{id:24, text:'Una empresa debe repartir un bono de $18.000.000 entre tres bodegas, de forma proporcional al número de despachos realizados: Bodega A realizó 300 despachos, Bodega B realizó 500 despachos y Bodega C realizó 200 despachos. ¿Cuánto le corresponde a la Bodega B?', opts:['$9.000.000','$5.400.000','$7.200.000','$10.800.000'], correct:0},
+{id:25, text:'Sin calcular el valor exacto: una empresa despacha en promedio 987 pedidos por día y opera 22 días al mes. ¿Cuál es el número aproximado de pedidos mensuales?', opts:['15.000 pedidos','18.000 pedidos','22.000 pedidos','26.000 pedidos'], correct:2},
+{id:26, text:'Una bodega tiene 48 pasillos, cada uno con aproximadamente 210 posiciones de almacenamiento. Sin multiplicar exactamente, ¿cuál es el orden de magnitud más cercano al número total de posiciones?', opts:['Cientos (≈10²)','Decenas de miles (≈10⁴)','Miles (≈10³)','Millones (≈10⁶)'], correct:1},
+{id:27, text:'Sin hacer el cálculo exacto, estime: el 19% de un pedido de 2.050 unidades es aproximadamente:', opts:['200 unidades','300 unidades','700 unidades','400 unidades'], correct:3},
+{id:28, text:'Un tracto-camión rinde entre 3,8 y 4,3 km por litro de combustible, según las condiciones de la vía. Si el tanque tiene 380 litros, ¿entre qué rango se estima la autonomía del vehículo?', opts:['Entre 1.440 y 1.630 km','Entre 1.000 y 1.300 km','Entre 1.700 y 1.900 km','Entre 2.000 y 2.200 km'], correct:0},
+{id:29, text:'Estime rápidamente el resultado de 812 × 48, sin realizar la multiplicación exacta, y seleccione la opción más cercana:', opts:['24.000','56.000','39.000','81.000'], correct:2},
+{id:30, text:'Una empresa de mensajería estima que cada motociclista entrega en promedio 35 paquetes en un turno de 8 horas. Si debe entregar aproximadamente 5.200 paquetes en un turno, ¿cuántos motociclistas necesita contratar, como mínimo, para cubrir la demanda?', opts:['100 motociclistas','150 motociclistas','125 motociclistas','175 motociclistas'], correct:1}
+];
+
+const sections = {1:'Lectura e interpretación de gráficas',11:'Lectura e interpretación de tablas',19:'Proporcionalidad',25:'Estimación rápida'};
+const qRoot=document.getElementById('questions');
+questions.forEach((q,i)=>{
+  if(sections[q.id]){const s=document.createElement('div');s.className='section';s.innerHTML=`<h2>${sections[q.id]}</h2>`;qRoot.appendChild(s)}
+  const card=document.createElement('article');card.className='card q';
+  const options=q.opts.map((o,j)=>`<label class="option"><input type="radio" name="q${q.id}" value="${j}"><span><strong>${String.fromCharCode(65+j)})</strong> ${o}</span></label>`).join('');
+  let extra='';
+  if(q.img) extra=`<div class="figure"><img src="${q.img}" alt="Gráfica de la pregunta ${q.id}"></div>`;
+  if(q.table) extra+=`<div style="overflow:auto"><table class="data-table"><tbody>${q.table.map((r,ri)=>`<tr>${r.map(c=>ri===0?`<th>${c}</th>`:`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+  card.innerHTML=`<div class="qhead"><div class="num">${i+1}</div><div class="qtitle">${q.text}</div></div>${extra}<div style="margin-top:12px">${options}</div>`;
+  qRoot.appendChild(card);
+});
+
+async function sendResults({name, code, score, pct, answers}) {
+  const payload = {
+    timestamp: new Date().toISOString(),
+    name,
+    code,
+    score,
+    total: questions.length,
+    percentage: pct,
+    answers: questions.map(q => ({
+      question: q.id,
+      selected: answers[q.id],
+      selectedText: q.opts[answers[q.id]]
+    }))
+  };
+
+  const status = document.getElementById('submitStatus');
+  if (!CONFIG.APPS_SCRIPT_URL || CONFIG.APPS_SCRIPT_URL.includes('PEGA_AQUI')) {
+    status.textContent = '⚠️ La evaluación funciona, pero todavía no está conectada a tu hoja de resultados. Cuando publiques Google Apps Script, pega aquí la URL del script.';
+    status.classList.add('show');
+    return;
+  }
+
+  try {
+    await fetch(CONFIG.APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type': 'text/plain;charset=utf-8'},
+      body: JSON.stringify(payload)
+    });
+    status.textContent = '✅ Tu evaluación fue enviada. Ya puedes cerrar esta página.';
+    status.classList.add('show');
+  } catch (err) {
+    status.textContent = '⚠️ No se pudo confirmar el envío. Conserva esta pantalla y avisa al docente.';
+    status.classList.add('show');
+    console.error(err);
+  }
+}
+
+document.getElementById('finishBtn').addEventListener('click', async ()=>{
+  const name=document.getElementById('studentName').value.trim();
+  const code=document.getElementById('studentCode').value.trim();
+  if(!name){alert('Escribe tu nombre antes de finalizar.');document.getElementById('studentName').focus();return;}
+  let unanswered=[];let score=0;const answers={};
+  questions.forEach(q=>{const el=document.querySelector(`input[name="q${q.id}"]:checked`);if(!el) unanswered.push(q.id);else{answers[q.id]=Number(el.value);if(Number(el.value)===q.correct)score++;}});
+  if(unanswered.length){alert(`Te faltan ${unanswered.length} pregunta(s) por responder. Revisa la evaluación antes de finalizar.`);const target=document.querySelector(`input[name="q${unanswered[0]}"]`);target?.scrollIntoView({behavior:'smooth',block:'center'});return;}
+
+  const btn=document.getElementById('finishBtn');
+  btn.disabled=true;
+  const pct=(score/questions.length*100).toFixed(1).replace('.',',');
+  document.getElementById('formArea').style.display='none';
+  document.getElementById('resultArea').style.display='block';
+  document.getElementById('resultName').textContent=`Estudiante: ${name}`;
+  document.getElementById('scoreText').textContent=`${score} / ${questions.length}`;
+  document.getElementById('pctText').textContent=`${pct}%`;
+  const review=document.getElementById('review');
+  review.innerHTML='<h2>Revisión de tus respuestas</h2><p class="note">La revisión indica únicamente si estuvo correcta o incorrecta y muestra la opción que seleccionaste. La respuesta correcta permanece oculta.</p>';
+  questions.forEach((q,i)=>{const sel=answers[q.id];const good=sel===q.correct;const el=document.createElement('div');el.className='item '+(good?'ok':'bad');el.innerHTML=`<div class="status">${good?'✅ Correcta':'❌ Incorrecta'} — Pregunta ${i+1}</div><div class="selected">Tu respuesta: <strong>${String.fromCharCode(65+sel)}) ${q.opts[sel]}</strong></div>`;review.appendChild(el);});
+  await sendResults({name, code, score, pct, answers});
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+function updateProgress(){const answered=document.querySelectorAll('input[type=radio]:checked').length;const pct=Math.round(answered/questions.length*100);document.getElementById('answeredText').textContent=`${answered} / ${questions.length} respondidas`;document.getElementById('percentText').textContent=`${pct}%`;document.getElementById('barFill').style.width=pct+'%';}
+document.addEventListener('change',updateProgress);
+</script>
+</body>
+</html>
